@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Accesibility Score</title>
+    <style>
+        html {
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            display: grid;
+            top: 0;
+            left: 0;
+            margin: 10px;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            grid-template-rows: 1fr;
+            align-content: stretch;
+            justify-content: stretch;
+        }
+
+        body.waiting * {
+            cursor: progress;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        tr {
+            border-bottom: 1px solid #cccccc;
+        }
+
+        th {
+            background-color: #cccccc;
+        }
+
+        td {
+            background-color: white;
+        }
+
+        pre {
+            border: 1px dotted #333;
+            background-color: white;
+            overflow: scroll;
+            counter-reset: line;
+            -webkit-user-select: text;
+            user-select: text;
+            margin: 0px;
+            align-self: stretch;
+            justify-self: stretch;
+        }
+
+        pre > code {
+            counter-increment: line;
+        }
+
+        pre > code::before {
+            display: inline-block;
+            width: 3em;
+            text-align: right;
+            border-right: 1px solid #eee;
+            content: counter(line) " ";
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .wrapper {
+            display: grid;
+            width: 98vw;
+            height: 98vh;
+            column-gap: 20px;
+            row-gap: 0px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto 1fr;
+            grid-template-areas:
+                "toolbar            toolbar"
+                "all-classes-header unique-classes-header"
+                "all-classes        unique-classes";
+        }
+
+        .grid-toolbar {
+            grid-area: toolbar;
+        }
+
+        .grid-all-classes-header {
+            grid-area: all-classes-header;
+        }
+
+        .grid-all-classes {
+            grid-area: all-classes;
+            align-self: stretch;
+            display: grid;
+            align-content: stretch;
+            justify-content: stretch;
+            overflow-y: scroll;
+        }
+
+        .grid-unique-classes-header {
+            grid-area: unique-classes-header;
+        }
+
+        .grid-unique-classes {
+            grid-area: unique-classes;
+            align-self: stretch;
+            display: grid;
+            align-content: stretch;
+            justify-content: stretch;
+            overflow-y: scroll;
+        }
+
+        .muted {
+            color: #999999;
+            font-size: .8rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="grid-toolbar">
+            <button id="find-classes" title="Find classes">&#128269;</button>
+            <button id="clear" title="clear">&#9003</button>
+        </div>
+        <h3  class="grid-all-classes-header">Classes (occurence)</h3>
+        <h3  class="grid-unique-classes-header">Unique Class (occurence) (usage count)</h3>
+        <div class="grid-all-classes">
+            <pre id="all-classes"></pre>
+        </div>
+        <div class="grid-unique-classes">
+            <pre id="unique-classes"></pre>
+        </div>
+    </div>
+    <script src="classessp.js"></script>
+</body>
+
+</html>
