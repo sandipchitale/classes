@@ -26,22 +26,24 @@
                 let nonUniqueClasses = [];
                 sortedClassesArray.forEach((classes, index) => {
                     if (typeof classes === 'string') {
-                        if (classes === previousClasses) {
-                            classesOrdinal++;
-                        } else {
-                            previousClasses = classes;
-                            classesOrdinal = 0;
-                        }
-                        let code = document.createElement('code');
-                        code.innerHTML = `( ${ordinal_suffix_of(classesOrdinal)} ) <a class="inspect" classes="${classes}" classes-ordinal="${classesOrdinal}" title="${classes}">&#128269;</a> ${classes} \n`;
-                        allClassesPre.appendChild(code);
-                        classes = classes.trim().split(/\s+/);
-                        classes.forEach(c => {
-                            nonUniqueClasses.push(c);
-                            if (uniqueClasses.indexOf(c) === -1) {
-                                uniqueClasses.push(c);
+                        if (classes.trim().split(/\s+/).length > 1) {
+                            if (classes === previousClasses) {
+                                classesOrdinal++;
+                            } else {
+                                previousClasses = classes;
+                                classesOrdinal = 0;
                             }
-                        });
+                            let code = document.createElement('code');
+                            code.innerHTML = `( ${ordinal_suffix_of(classesOrdinal)} ) <a class="inspect" classes="${classes}" classes-ordinal="${classesOrdinal}" title="${classes}">&#128269;</a> ${classes} \n`;
+                            allClassesPre.appendChild(code);
+                            classes = classes.trim().split(/\s+/);
+                            classes.forEach(c => {
+                                nonUniqueClasses.push(c);
+                                if (uniqueClasses.indexOf(c) === -1) {
+                                    uniqueClasses.push(c);
+                                }
+                            });
+                        }
                     }
                 });
                 uniqueClasses.sort();

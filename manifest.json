@@ -1,6 +1,6 @@
 {
     "name": "classes",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Chrome Devtools Elements side panel to show classList and unique classes.",
     "icons": {
         "128": "icon_128.png"
