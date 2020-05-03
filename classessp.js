@@ -33,7 +33,7 @@
                             classesOrdinal = 0;
                         }
                         let code = document.createElement('code');
-                        code.innerHTML = `( ${ordinal_suffix_of(classesOrdinal)} ) <a class="inspect" classes="${classes}" classesOrdinal="${classesOrdinal}" title="${classes}">&#128269;</a> ${classes} \n`;
+                        code.innerHTML = `( ${ordinal_suffix_of(classesOrdinal)} ) <a class="inspect" classes="${classes}" classes-ordinal="${classesOrdinal}" title="${classes}">&#128269;</a> ${classes} \n`;
                         allClassesPre.appendChild(code);
                         classes = classes.trim().split(/\s+/);
                         classes.forEach(c => {
@@ -58,7 +58,7 @@
                         const count = uniqueClassesCounts[c];
                         for (let i = 0; i < count; i++) {
                             let code = document.createElement('code');
-                            code.innerHTML = `( ${ordinal_suffix_of(i)} ) <a class="inspect" classes="${c}" classesOrdinal="${i}" title="${c}">&#128269;</a> ${c}${!uniqueClassesCounts[c] ? '' : ' ( ' + uniqueClassesCounts[c] + ' )' }\n`;
+                            code.innerHTML = `( ${ordinal_suffix_of(i)} ) <a class="inspect" classes="${c}" classes-ordinal="${i}" title="${c}">&#128269;</a> ${c}${!uniqueClassesCounts[c] ? '' : ' ( ' + uniqueClassesCounts[c] + ' )' }\n`;
                             uniqueClassesPre.appendChild(code);
                         }
                     }
@@ -68,7 +68,9 @@
                 // Convert buttons NodeList to an array
                 let inspectAnchorArray = Array.prototype.slice.call(inspectAnchors);
                 inspectAnchorArray.forEach((inspectAnchor) => {
-                    inspectAnchor.onclick = inspect.bind(inspectAnchor, inspectAnchor.getAttribute('classes'), inspectAnchor.getAttribute('classesOrdinal'));
+                    inspectAnchor.onclick = inspect.bind(inspectAnchor
+                        ,inspectAnchor.getAttribute('classes')
+                        ,inspectAnchor.getAttribute('classes-ordinal'));
                 });
             }
         });
